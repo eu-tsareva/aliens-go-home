@@ -10,15 +10,28 @@ import FlyingObject from './FlyingObject';
 import Heart from './Heart';
 import StartGame from './StartGame';
 import Title from './Title';
+import Login from './Login';
+import { signIn } from 'auth0-web';
+import Leaderboard from './Leaderboard';
 
 const Canvas = (props) => {
   const gameHeight = 1200;
   const viewBox = [window.innerWidth / -2, 100 - gameHeight, window.innerWidth, gameHeight];
+  const lives = [];
+  for (let i = 0; i < props.gameState.lives; i++) {
+    const heartPosition = {
+      x: -180 - (i * 70),
+      y: 35
+    };
+    lives.push(<Heart key={i} position={heartPosition}/>)
+  }
+
   return (
     <svg
       id="aliens-go-home-canvas"
       viewBox={viewBox}
       onMouseMove={props.trackMouse}
+      onClick={props.shoot}
     >
       <defs>
         <filter id="shadow">
@@ -27,13 +40,17 @@ const Canvas = (props) => {
       </defs>
       <Sky />
       <Ground />
+      {props.gameState.cannonBalls.map(cannonBall => (
+        <CannonBall key={cannonBall.id} position={cannonBall.position}/>
+      ))}
       <CannonPipe rotation={props.angle} />
       <CannonBase />
-      <CurrentScore score={23} />
+      <CurrentScore score={props.gameState.kills} />
       { ! props.gameState.started &&
         <g>
           <StartGame onClick={props.startGame}/>
           <Title />
+          <Leaderboard currentPlayer={props.currentPlayer} authenticate={signIn} leaderboard={props.players} />
         </g>
       }
       { props.gameState.started &&
@@ -43,9 +60,7 @@ const Canvas = (props) => {
           ))}
         </g>
       }
-{/*      <Heart position={{x: -300, y: 35}} />
-      <CannonBall position={ {x: 100, y: -100} }/>
-*/}
+      {lives}
     </svg>
   );
 };
@@ -53,6 +68,24 @@ const Canvas = (props) => {
 Canvas.propTypes = {
   angle: PropTypes.number.isRequired,
   trackMouse: PropTypes.func.isRequired,
-}
+  currentPlayer: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    maxScore: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    picture: PropTypes.string.isRequired,
+  }),
+  players: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    maxScore: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    picture: PropTypes.string.isRequired,
+  })),
+  shoot: PropTypes.func.isRequired,
+};
+
+Canvas.defaultProps = {
+  currentPlayer: null,
+  players: null,
+};
 
 export default Canvas;

@@ -12,5 +12,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "auth0-web": "^1.7.0",
+    "socket.io-client": "^2.1.0"
   }
 }
