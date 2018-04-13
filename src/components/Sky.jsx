@@ -10,7 +10,7 @@ const Sky = () => {
     <rect
       style={skyStyle}
       x={constants.skyAndGroundWidth/-2}
-      y={100-gameHeight}
+      y={100 - gameHeight}
       width={constants.skyAndGroundWidth}
       height={gameHeight}
     />

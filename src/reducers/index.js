@@ -21,6 +21,8 @@ const initialGameState = {
 const initialState = {
   angle: 45,
   gameState: initialGameState,
+  currentPlayer: null,
+  players: null,
 };
 
 function reducer(state = initialState, action) {

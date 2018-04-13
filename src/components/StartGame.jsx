@@ -4,12 +4,12 @@ import { gameWidth } from '../utils/constants';
 
 const StartGame = (props) => {
   const button = {
-    x: gameWidth / -2, // половина ширины
-    y: -280, // минус значит "над" (выше нуля)
+    x: gameWidth / -2,
+    y: -280,
     width: gameWidth,
     height: 200,
-    rx: 10, // border радиус
-    ry: 10, // border радиус
+    rx: 10,
+    ry: 10,
     style: {
       fill: 'transparent',
       cursor: 'pointer',
@@ -18,9 +18,9 @@ const StartGame = (props) => {
   };
 
   const text = {
-    textAnchor: 'middle', // центр
-    x: 0, // центр относительно оси X
-    y: -150, // 150 выше нуля (по оси Y)
+    textAnchor: 'middle',
+    x: 0,
+    y: -150,
     style: {
       fontFamily: '"Joti One", cursive',
       fontSize: 60,

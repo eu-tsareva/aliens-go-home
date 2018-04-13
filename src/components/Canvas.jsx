@@ -10,7 +10,6 @@ import FlyingObject from './FlyingObject';
 import Heart from './Heart';
 import StartGame from './StartGame';
 import Title from './Title';
-import Login from './Login';
 import { signIn } from 'auth0-web';
 import Leaderboard from './Leaderboard';
 
@@ -25,7 +24,6 @@ const Canvas = (props) => {
     };
     lives.push(<Heart key={i} position={heartPosition}/>)
   }
-
   return (
     <svg
       id="aliens-go-home-canvas"
