@@ -17,7 +17,7 @@ function moveObjects(state, action) {
   let flyingObjects = newState.gameState.flyingObjects.filter(object => (
     (now - object.createdAt) < 4000
   ));
-  
+
   const lostLife = state.gameState.flyingObjects.length > flyingObjects.length;
   let lives = state.gameState.lives;
   if (lostLife) {
@@ -30,7 +30,6 @@ function moveObjects(state, action) {
     cannonBalls = [];
     lives = 3;
   }
-
 
   const { x, y } = mousePosition;
   const angle = calculateAngle(0, 0, x, y);
